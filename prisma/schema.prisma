@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  String    @id @default(uuid())
+  email               String    @unique
+  magicToken          String?   @unique
+  magicTokenExpiresAt DateTime?
+  dailyLimit          Int       @default(10)
+
+  createdAt DateTime @default(now())
+  Audio     Audio[]
+  updatedAt DateTime @updatedAt
+}
+
+model Audio {
+  id         String  @unique @default(cuid())
+  reference  String
+  text_brute String? // Tornando opcional
+  name       String?
+  resume     String? // Tornando opcional
+  User       User?   @relation(fields: [userId], references: [id])
+  userId     String?
+}

@@ -1,0 +1,33 @@
+{
+  "name": "speakly",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "bun --watch run src/server.ts",
+    "prisma:generate": "bunx prisma generate",
+    "prisma:migrate": "bunx prisma migrate dev",
+    "prisma:migrate:create": "bunx prisma migrate dev --create-only --name user-magic-token",
+    "prisma:reset": "bunx prisma migrate reset --force",
+    "prisma-init": "bunx prisma init --datasource-provider sqlite"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.888.0",
+    "@aws-sdk/s3-request-presigner": "^3.888.0",
+    "@fastify/jwt": "^10.0.0",
+    "@fastify/multipart": "^9.2.1",
+    "@google/generative-ai": "^0.24.1",
+    "@prisma/client": "^6.16.1",
+    "assemblyai": "^4.16.1",
+    "fastify": "^5.6.0",
+    "form-data": "^4.0.4",
+    "prisma": "^6.16.1",
+    "zod": "^4.1.8"
+  }
+}

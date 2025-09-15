@@ -1,7 +1,7 @@
 import ValidateToken from "@server/controllers/user/validate-token";
 import MagicLinkAuth from "@server/controllers/user/magic-link-auth";
 import RequestUploadUrl from "@server/controllers/audio/request-upload-url";
-import ProcessUploadedAudio from "@server/controllers/audio/process-uploaded-audio"; // Importar novo controller
+import ProcessUploadedAudio from "@server/controllers/audio/process-uploaded-audio"; 
 import type { FastifyInstance } from "fastify";
 
 export async function appRoutes(app: FastifyInstance) {

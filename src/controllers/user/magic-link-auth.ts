@@ -20,7 +20,7 @@ export default async function MagicLinkAuth(
   });
 
   const magicToken = randomBytes(20).toString("hex");
-  const magicTokenExpiresAt = new Date(Date.now() + 1 * 60 * 1000); // 15 minutes
+  const magicTokenExpiresAt = new Date(Date.now() + 5 * 60 * 1000); // 15 minutes
 
   if (user) {
     user = await prisma.user.update({
@@ -45,7 +45,7 @@ export default async function MagicLinkAuth(
 
   if (user?.id) {
     console.log(
-      `🧞‍♀️ Magic link sent to ${user.email}: http://localhost:3333/token/${magicToken}`,
+      `🧞‍♀️ Magic link sent to ${user.email}: http://localhost:3000/token/${magicToken}`,
     );
     return reply.send({
       success: true,

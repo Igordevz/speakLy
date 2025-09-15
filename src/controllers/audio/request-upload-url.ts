@@ -2,7 +2,6 @@ import { prisma } from "@server/lib/prisma";
 import { getSignedPutUrl } from "@server/lib/r2";
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
-// import { transcribeAudio, summarizeText } from "@server/lib/openai"; // Remove OpenAI imports
 
 export default async function RequestUploadUrl(req: FastifyRequest, reply: FastifyReply) {
   const uploadSchema = z.object({
@@ -22,7 +21,6 @@ export default async function RequestUploadUrl(req: FastifyRequest, reply: Fasti
 
   let decodedPayload: { sub: string };
   try {
-    // Decode the token using Fastify's JWT plugin instance
     decodedPayload = req.server.jwt.decode(jwtToken) as { sub: string };
   } catch (error) {
     reply.status(401).send({ error: "Unauthorized: Invalid JWT token." });
@@ -43,9 +41,8 @@ export default async function RequestUploadUrl(req: FastifyRequest, reply: Fasti
   const audio = await prisma.audio.create({
     data: {
       userId: userId,
-      reference: reference, // Ensure reference is saved
+      reference: reference, 
       name: name,
-      // text_brute and resume will be updated later
     },
   });
 

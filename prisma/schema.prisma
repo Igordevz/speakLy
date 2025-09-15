@@ -13,18 +13,20 @@ model User {
   magicToken          String?   @unique
   magicTokenExpiresAt DateTime?
   dailyLimit          Int       @default(10)
-
-  createdAt DateTime @default(now())
-  Audio     Audio[]
-  updatedAt DateTime @updatedAt
+  createdAt           DateTime  @default(now())
+  Audio               Audio[]
+  updatedAt           DateTime  @updatedAt
 }
 
 model Audio {
-  id         String  @unique @default(cuid())
+  id         String   @unique @default(cuid())
   reference  String
-  text_brute String? // Tornando opcional
+  text_brute String?
   name       String?
-  resume     String? // Tornando opcional
-  User       User?   @relation(fields: [userId], references: [id])
+  resume     String?
+  User       User?    @relation(fields: [userId], references: [id])
   userId     String?
+  file_size  String?
+  duration   String?
+  createdAt  DateTime @default(now())
 }

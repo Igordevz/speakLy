@@ -1,1 +1,3 @@
-console.log("Hello via Bun!");
+import { start } from "./src/server";
+
+start();

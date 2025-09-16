@@ -6,10 +6,11 @@ import { z } from "zod";
 export default async function RequestUploadUrl(req: FastifyRequest, reply: FastifyReply) {
   const uploadSchema = z.object({
     name: z.string().optional(),
-    contentType: z.string().startsWith("audio/"), 
+    contentType: z.string().startsWith("audio/"),
+    fileSize: z.string().optional(), 
   });
 
-  const { name, contentType } = uploadSchema.parse(req.body);
+  const { name, contentType, fileSize } = uploadSchema.parse(req.body); 
 
   // Get JWT from custom 'jwt' header
   const jwtToken = req.headers['jwt'] as string | undefined;
@@ -43,6 +44,7 @@ export default async function RequestUploadUrl(req: FastifyRequest, reply: Fasti
       userId: userId,
       reference: reference, 
       name: name,
+      file_size: fileSize, // Added fileSize to data
     },
   });
 

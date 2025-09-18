@@ -5,13 +5,11 @@ import type { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
 export default async function ProcessUploadedAudio(req: FastifyRequest, reply: FastifyReply) {
-  const processSchema = z.object({
-    audioId: z.string(),
-    reference: z.string(),
-    contentType: z.string().startsWith("audio/"),
+  const paramsSchema = z.object({
+    audioId: z.string().cuid(),
   });
 
-  const { audioId, reference, contentType } = processSchema.parse(req.body);
+  const { audioId } = paramsSchema.parse(req.params);
 
   const jwtToken = req.headers['jwt'] as string | undefined;
 
@@ -43,7 +41,7 @@ export default async function ProcessUploadedAudio(req: FastifyRequest, reply: F
     throw new Error("Audio record not found or unauthorized.");
   }
 
-  const audioUrl = await getSignedGetUrl(reference);
+  const audioUrl = await getSignedGetUrl(audioRecord?.reference);
 
   console.log(`[R2] Signed Audio URL for Gemini: ${audioUrl}`);
 

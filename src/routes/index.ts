@@ -18,5 +18,5 @@ export async function appRoutes(app: FastifyInstance) {
   app.post("/audio/upload-url", RequestUploadUrl)
 
   // Protected route for processing uploaded audio
-  app.post("/audio/process-uploaded", ProcessUploadedAudio)
+  app.get("/audio/process-uploaded/:audioId", ProcessUploadedAudio)
 }
